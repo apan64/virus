@@ -206,11 +206,11 @@ class xv11():
         #self.port.send("getldsscan\r\n")
         try:
             sensor_packet, _ = self.sensor_sock.recvfrom(65536)
-            print 'got a sensor packet'
+            # print 'got a sensor packet'
             self.sensor_dict = pickle.loads(sensor_packet)
         except socket.timeout:
             self.sensor_dict = {}
-            print "no packet received... not necessarily a problem"
+            # print "no packet received... not necessarily a problem"
 
     def getScanRanges(self):
         """ Read values of a scan -- call requestScan first! """

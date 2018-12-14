@@ -9,7 +9,8 @@ class ConnectNode(object):
     '''
     Creating node to run on neato that will attempt to connect to another free neato to begin with
 
-    Launch neato with 'ROS_NAMESPACE=r1 roslaunch neato_node bringup_minimal.launch host:=192.168.16.82', then this node with 'ROS_NAMESPACE=r1 rosrun virus connect.py'
+    Launch neato with 'ROS_NAMESPACE=r1 roslaunch neato_node bringup_minimal.launch host:=192.168.16.82' (the driver in this case has been edited to disable UDP), 
+    then this node with 'ROS_NAMESPACE=r1 rosrun virus connect.py'
     '''
     def __init__(self):
         rospy.init_node('connect_node')
@@ -23,7 +24,7 @@ class ConnectNode(object):
 
     def connect(self, ip):
         '''
-        Attempt to connect to a neato of the provided ip
+        Attempt to connect to a neato of the provided ip, calls roslaunch with an appropriate launch file then prepares a publisher for the newly connected node
         '''
         if ip in self.connected_ips:
             return
@@ -39,6 +40,9 @@ class ConnectNode(object):
         time.sleep(3)
 
     def search_ips(self):
+        '''
+        Scans current network for responsive ips, and adds any potentially viable ones to the store of available ips
+        '''
         def test_ip(ip):
             pinging = Popen(['ping', '-c', '3', ip], stdout=PIPE)
             pinging.communicate()
@@ -51,10 +55,13 @@ class ConnectNode(object):
             new_thread.start()
 
     def publish_movement(self, pub):
+        '''
+        General function for publishing movements to the robots
+        '''
         pub.publish(Twist(Vector3(0, 0, 0), Vector3(0, 0, .5 * self.switch)))
 
     def run(self):
-        self.connect(ip='192.168.16.85')
+        # self.connect(ip='192.168.16.85')
         self.search_ips()
         while not rospy.is_shutdown():
             if len(self.available_ips):
