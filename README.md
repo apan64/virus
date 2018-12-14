@@ -2,7 +2,13 @@
 
 ## An attempt to make the lives of others slightly more bothersome
 
-The main idea of this project is to program a Neato to hijack wireless sessions of other Neatos and begin issuing commands to them, ultimately creating and coordinating a swarm.  As ROS implementations assume that systems will be running on a closed network, there is not much in terms of security protocols that have been built into communications between components in a ROS network, leaving many vulnerabilities open if a bad actor manages to gain access to a network.  As a general overview, this project consists of a primary running node that issues commands to a single Neato while scanning the network for other potential Neatos.  Upon finding a machine, it attempts to launch a node on said machine through a threaded subprocess and adds the machine to its stored network of Neatos.  Once a Neato has been added to the network, it receives commands from the master node which can range from simple movements to coordinated ones.
+The main idea of this project is to program a Neato to hijack wireless sessions of other Neatos and begin issuing commands to them, ultimately creating and coordinating a swarm.  As ROS implementations assume that systems will be running on a closed network, there is not much in terms of security protocols that have been built into communications between components in a ROS network, leaving many vulnerabilities open if a bad actor manages to gain access to a network.  As a general overview, this project consists of a primary running node that issues commands to a single Neato while scanning the network for other potential Neatos.  
+
+![potential ips found](potential_ip.png "Potential IPs Found")
+
+Upon finding a machine, it attempts to launch a node on said machine through a threaded subprocess and adds the machine to its stored network of Neatos.  Once a Neato has been added to the network, it receives commands from the master node which can range from simple movements to coordinated ones.
+
+![connected](connected.png "Connected Neato")
 
 ## Project Stories
 
