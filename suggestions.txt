@@ -1,0 +1,16 @@
+paul's suggestions:
+connect directly to the pi, spoof sensor data sent from the pi, it's just being stored/loaded in pickle files and sent via udp
+try to connect to pi and and spoof tcp messages to issue commands
+
+resource for launching slave on free machine from host: https://answers.ros.org/question/216518/roslaunch-on-slave/
+
+plan:
+run a node on neato that is able to connect to another neato
+    should be doable, start with calling roslaunch then rosrun from the neato directed at the free one
+        may require running roscore?
+        may require threading
+        may have to just ssh to the new raspi
+run basic movement commands, just publish some messages to a topic
+    this part supposedly requires TCP connections
+obtain sensor data from the slaved neato
+    this part should be pickled udp messages, in format of a dictionary when unpickled

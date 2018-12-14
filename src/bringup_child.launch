@@ -1,0 +1,16 @@
+<launch>
+  <arg name="use_sim_time" value="false"/>
+  <arg name="host"/>
+  <arg name="receive_port" default="5000"/>
+  <arg name="width" default="640"/>
+  <arg name="height" default="480"/>
+  <arg name="fps" default="30"/>
+  <arg name="address" default="0"/>
+  <arg name="namespace" default="r2"/>
+
+  <include file="$(find virus)/src/bringup_minimal_child.launch">
+	<arg name="host" value="$(arg host)"/>
+  <arg name="address" value="$(arg address)"/>
+  <arg name="namespace" value="$(arg namespace)"/>
+  </include>
+</launch>
